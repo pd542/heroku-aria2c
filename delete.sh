@@ -21,10 +21,10 @@ find "${topPath}" ! -path "${topPath}" -depth -type d -empty -exec rm -vrf {} \;
 echo -e "$(date +"%m/%d %H:%M:%S") ${INFO} Download error or stop, start deleting files finish"
 
 list=`wget -qO- https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all.txt|awk NF|sed ":a;N;s/\n/,/g;ta"`
-if [ -z "`grep "bt-tracker" /root/.aria2/aria2.conf`" ]; then
-    sed -i '$a bt-tracker='${list} /root/.aria2/aria2.conf
+if [ -z "`grep "bt-tracker" aria2c.conf`" ]; then
+    sed -i '$a bt-tracker='${list} aria2c.conf
     echo add......
 else
-    sed -i "s@bt-tracker=.*@bt-tracker=$list@g" /root/.aria2/aria2.conf
+    sed -i "s@bt-tracker=.*@bt-tracker=$list@g" aria2c.conf
     echo update......
 fi
